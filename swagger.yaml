@@ -1,0 +1,791 @@
+---
+swagger: '2.0'
+################################################################################
+#                              API Information                                 #
+################################################################################
+info:
+  version: 0.1.0
+  title: Politicos API
+  description: API para acessar dados relacionados aos politicos brasileiros.
+  contact:
+    name: Amadeu Cavalcante
+    email: amadeu01@gmail.com
+  license:
+    name: AGPL-3.0
+    url: http://www.gnu.org/licenses/agpl-3.0.html
+
+################################################################################
+#                  Host, Base Path, Schemes and Content Types                  #
+################################################################################
+host: 'politicos.olhoneles.org:80'
+basePath: /api/v0
+produces:
+  - application/json
+consumes:
+  - application/json
+schemes:
+  - http
+
+################################################################################
+#                                           Paths                              #
+################################################################################
+
+paths:
+  /candidacies:
+    get:
+      parameters:
+        - type: integer
+          in: query
+          required: false
+          name: limit
+          description: Specify the number of element to display per page.
+        - type: integer
+          in: query
+          required: false
+          name: offset
+          description: Specify the offset to start displaying element on a page.
+        - type: boolean
+          in: query
+          required: false
+          name: elected__gt
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__year
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__month
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__isnull
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__second
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__week_day
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__in
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__regex
+          description: 'Boolean data. Ex: True'
+    
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: '#/definitions/Meta'
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/Candidacies"
+              
+  /candidacies/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Candidacy'
+  
+  /candidacies-status:
+    get:
+      responses:
+        200:
+          description: Success
+  /candidacies-status/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Success
+          schemes:
+            $ref: '#/definitions/Candidacy_status'
+    
+  /cities:
+    get:
+      responses:
+        200:
+          description: Success
+  /cities/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /cities/search:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /countries:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /countries/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /educations/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /elections:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /elections/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /ethnicities:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /ethnicities/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /institutions:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /institutions/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /mandate-event-types:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /mandate-event-types/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /mandate-events:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /mandate-events/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /mandates:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /mandates/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /marital-status:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /marital-status/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /nationalities:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /nationalities/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /occupations:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /occupations/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /occupations/search:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /political-offices:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /political-parties:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /political-parties/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /politician-event-types:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /politician-event-types/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /politician-events:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /politician-events/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /politicians:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /politicians/{id}:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /politicians/search:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+  /states:
+    get:
+      summary: 
+      description: 
+      responses:
+        200:
+          description: OK
+    
+
+    
+################################################################################
+#                                 Definitions                                  #
+################################################################################
+
+definitions:
+  
+  Candidacy:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      political_office: 
+        $ref: '#/definitions/Political_office' 
+      city: 
+        $ref: '#/definitions/City'
+      state:
+        $ref: '#/definitions/State'
+      institution:
+        $ref: '#/definitions/Institution'
+      elected: 
+        type: boolean
+      resource_uri:
+        type: string
+      election_round:
+        $ref: '#/definitions/Election_round'
+      candidacy_status:
+        $ref: '#/definitions/Candidacy_status'
+      
+
+  Candidacies:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      political_office: 
+        $ref: '#/definitions/Political_office' 
+      city: 
+        $ref: '#/definitions/City'
+      state:
+        $ref: '#/definitions/State'
+      institution:
+        $ref: '#/definitions/Institution'
+      elected: 
+        type: boolean
+      resource_uri:
+        type: string
+      election_round:
+        $ref: '#/definitions/Election_round'
+      candidacy_status:
+        $ref: '#/definitions/Candidacy_status'
+      politician:
+        $ref: "#/definitions/Politician"
+  
+  Political_office:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+      term:
+        type: integer
+      wikipedia:
+        type: string
+   
+  Candidacy_status:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+  City:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      logo:
+        type: string
+      name:
+        type: string
+      resource_uri:
+        type: string
+      state:
+        type: string
+  
+  Election_round:
+    type: object
+    properties:
+      date:
+        type: string
+        format: date
+      election:
+        type: string
+      id:
+        type: integer
+        format: int64
+      resource_uri:
+        type: string
+      round_number:
+        type: integer
+  
+  
+  Institution:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      logo:
+        type: string
+      name:
+        type: string
+      political_offices:
+        type: array
+        items:
+          $ref: '#/definitions/Political_offices'
+      resource_uri:
+        type: string
+      website:
+        type: string
+      siglum:
+        type: string
+      wikipedia:
+        type: string
+          
+  Political_offices:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      description:
+        type: string
+      name:
+        type: string
+      resource_uri:
+        type: string
+      term:
+        type: integer
+      slug:
+        type: string
+      wikipedia:
+        type: string
+      
+  Meta:
+    type: object
+    properties:
+      previous:
+        type: string
+      total_count:
+        type: integer
+      offset:
+        type: integer
+      next:
+        type: string
+  
+  State:
+    type: object
+    properties:
+      country:
+        type: string
+      id:
+        type: integer
+        format: int64
+      logo:
+        type: string
+      siglum:
+        type: string
+      slug:
+        type: string
+      wikipedia:
+        type: string
+  
+  Education:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+        
+  Marital_status:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+      
+  Alternative_names:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+  
+  Occupation:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+        
+  Political_parties:
+    type: object
+    properties:
+      date_end:
+        type: string
+        format: date
+      date_start:
+        type: string
+        format: date
+      id:
+        type: integer
+        format: int64
+      resource_uri:
+        type: string
+      political_party:
+        $ref: '#/definitions/Political_party'
+  
+  Political_party:
+    type: object
+    properties:
+      founded_date:
+        type: string
+        format: date
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      siglum:
+        type: string
+      logo:
+        type: string
+      resource_uri:
+        type: string
+      tse_number:
+        type: integer
+      wikipedia:
+        type: string
+      website:
+        type: string
+  
+  Nationality:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+        
+  Events:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      description:
+        type: string
+      resource_uri:
+        type: string
+      date:
+        type: string
+        format: date
+      politician_event_type:
+        $ref: '#/definitions/Politician_event_type'
+  
+  Politician_event_type:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+  
+  Politician:
+    type: object
+    properties:
+      about:
+        type: string
+      candidacies:
+        type: array
+        items:
+          $ref: '#/definitions/Candidacy'
+      alternative_names:
+        type: array
+        items:
+          $ref: '#/definitions/Alternative_names'
+      cpf:
+        type: string
+      date_of_birth:
+        type: string
+        format: date
+      education:
+        $ref: '#/definitions/Education'
+      email:
+        type: string
+      ethnicity:
+        type: string
+      events: 
+        type: array
+        items:
+          $ref: '#/definitions/Events'
+      gender:
+        type: string
+      id:
+        type: integer
+        format: int64
+      marital_status:
+        $ref: '#/definitions/Marital_status'
+      name:
+        type: string
+      nationality:
+        $ref: '#/definitions/Nationality'
+      occupation:
+        $ref: '#/definitions/Occupation'
+      picture:
+        type: string
+      place_of_birth:
+        type: string
+      political_parties:
+        type: array
+        items:
+          $ref: '#/definitions/Political_parties'
+      resource_uri:
+        type: string
+      state:
+        $ref: '#/definitions/State'
+      website:
+        type: string
