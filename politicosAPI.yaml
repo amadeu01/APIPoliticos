@@ -1,0 +1,3552 @@
+---
+swagger: '2.0'
+################################################################################
+#                              API Information                                 #
+################################################################################
+info:
+  version: 0.1.0
+  title: Politicos API
+  description: API para acessar dados relacionados aos politicos brasileiros.
+  contact:
+    name: Amadeu Cavalcante
+    email: amadeu01@gmail.com
+  license:
+    name: AGPL-3.0
+    url: http://www.gnu.org/licenses/agpl-3.0.html
+
+################################################################################
+#                  Host, Base Path, Schemes and Content Types                  #
+################################################################################
+host: 'politicos.olhoneles.org:80'
+basePath: /api/v0
+produces:
+  - application/json
+consumes:
+  - application/json
+schemes:
+  - http
+
+################################################################################
+#                                           Paths                              #
+################################################################################
+
+paths:
+  /candidacies:
+    get:
+      parameters:
+        - type: integer
+          in: query
+          required: false
+          name: limit
+          description: Specify the number of element to display per page.
+        - type: integer
+          in: query
+          required: false
+          name: offset
+          description: Specify the offset to start displaying element on a page.
+        - type: boolean
+          in: query
+          required: false
+          name: elected__gt
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__year
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__month
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__isnull
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__second
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__week_day
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__in
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: elected__regex
+          description: 'Boolean data. Ex: True'
+    
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: '#/definitions/Meta'
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/Candidacies"
+  /candidacies/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Candidacy'
+  /candidacies-status:
+    get:
+      parameters:
+        - type: integer
+          in: query
+          required: false
+          name: limit
+          description: 'Specify the number of element to display per page.'
+        - type: integer
+          in: query
+          required: false
+          name: offset
+          description: 'Specify the offset to start displaying element on a page.'
+        - type: string
+          in: query
+          required: false
+          name: name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+          
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: "#/definitions/Meta"
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/Candidacy_status"
+  /candidacies-status/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/Candidacy_status"
+  /cities:
+    get:
+      parameters:
+        - type: integer
+          in: query
+          required: false
+          name: limit
+          description: 'Specify the number of element to display per page.'
+        - type: integer
+          in: query
+          required: false
+          name: offset
+          description: 'Specify the offset to start displaying element on a page.'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__siglum__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: state__slug__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: integer
+          in: query
+          required: false
+          name: state__gt
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: state__in
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: state__gte
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: state__lt
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: state__lte
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: state
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: string
+          in: query
+          required: false
+          name: name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: "#/definitions/Meta"
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/City"
+  /cities/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            $ref: "#/definitions/City"
+  /cities/search:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: "#/definitions/Meta"
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/City"
+  /countries:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: "#/definitions/Meta"
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/Country"
+  /countries/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /educations/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /elections:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /elections/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /ethnicities:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: "#/definitions/Meta"
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/Ethnicities"
+  /ethnicities/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            $ref: "#/definitions/Ethnicities"
+  /institutions:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /institutions/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /mandate-event-types:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /mandate-event-types/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /mandate-events:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /mandate-events/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+  /mandates:
+    get:
+      parameters:
+        - type: integer
+          in: query
+          required: false
+          name: limit
+          description: 'Specify the number of element to display per page.'
+        - type: integer
+          in: query
+          required: false
+          name: offset
+          description: 'Specify the offset to start displaying element on a page.'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__gt
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__year
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__month
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__isnull
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__second
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__week_day
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__in
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__regex
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__gte
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__contains
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__lt
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__startswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__iendswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__icontains
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__iexact
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__day
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__minute
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__search
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__hour
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__iregex
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__endswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__range
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__istartswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacy__elected__lte
+          description: 'Boolean data. Ex: True'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__siglum__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__state__slug__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: integer
+          in: query
+          required: false
+          name: candidacy__state__gt
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: candidacy__state__in
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: candidacy__state__gte
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: candidacy__state__lt
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: candidacy__state__lte
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: candidacy__state
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacy__political_office__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: "#/definitions/Meta"
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/Mandates"
+    
+  /mandates/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            $ref: "#/definitions/Mandates"
+    
+  /marital-status:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /marital-status/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer 
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /nationalities:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /nationalities/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /occupations:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /occupations/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /occupations/search:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /political-offices:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /political-parties:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /political-parties/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /politician-event-types:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /politician-event-types/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /politician-events:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /politician-events/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /politicians:
+    get:
+      parameters:
+        - type: integer
+          in: query
+          required: false
+          name: limit
+          description: Specify the number of element to display per page.
+        - type: integer
+          in: query
+          required: false
+          name: offset
+          description: Specify the offset to start displaying element on a page.
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__gt
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__year
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__month
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__isnull
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__second
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__week_day
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__in
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__regex
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__gte
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__contains
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__lt
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__startswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__iendswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__icontains
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__iexact
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__day
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__minute
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__search
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__hour
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__iregex
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__endswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__range
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__istartswith
+          description: 'Boolean data. Ex: True'
+        - type: boolean
+          in: query
+          required: false
+          name: candidacies__elected__lte
+          description: 'Boolean data. Ex: True'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__siglum__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__state__slug__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__state__gt
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__state__in
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__state__gte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__state__lt
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__state__lte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__state
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__political_office__slug__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__political_office__gt
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__political_office__in
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__political_office__gte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__political_office__lt
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__political_office__lte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__political_office
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__nationality__slug__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__nationality__gt
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__nationality__in
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__nationality__gte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__nationality__lt
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__nationality__lte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__nationality
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__minute
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__search
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__hour
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__iregex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__endswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__range
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__istartswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__education__name__lte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__education__gt
+          description: 'A single related resource. Can be either a URI or set of nested resource data.'
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__education__in
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__education__gte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__education__lt
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__education__lte
+          description: A single related resource. Can be either a URI or set of nested
+            resource data.
+        - type: integer
+          in: query
+          required: false
+          name: candidacies__politician__education
+          description: A single related resource. Can be either a URI or set of nestedresource data.
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__gt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__year
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__month
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__isnull
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__second
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__week_day
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__in
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__regex
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__gte
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__contains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__lt
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__startswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__iendswith
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__icontains
+          description: 'Unicode string data. Ex: "Hello World"'
+        - type: string
+          in: query
+          required: false
+          name: candidacies__politician__ethnicity__name__iexact
+          description: 'Unicode string data. Ex: "Hello World"'
+      description: ""
+      responses:
+        200:
+          description: Sucess
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: "#/definitions/Meta"
+              objects:
+                type: array
+                items:
+                  $ref: "#/definitions/Politician"
+    
+  /politicians/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /politicians/search:
+    get:
+      description: ""
+      responses:
+        200:
+          description: Sucess
+    
+  /states:
+    get:
+      description: "" 
+      responses:
+        200:
+          description: Sucess
+    
+
+    
+################################################################################
+#                                 Definitions                                  #
+################################################################################
+
+definitions:
+  
+  Candidacy:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      political_office: 
+        $ref: '#/definitions/Political_office' 
+      city: 
+        $ref: '#/definitions/City'
+      state:
+        $ref: '#/definitions/State'
+      institution:
+        $ref: '#/definitions/Institution'
+      elected: 
+        type: boolean
+      resource_uri:
+        type: string
+      election_round:
+        $ref: '#/definitions/Election_round'
+      candidacy_status:
+        $ref: '#/definitions/Candidacy_status'
+  Candidacies:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      political_office: 
+        $ref: '#/definitions/Political_office' 
+      city: 
+        $ref: '#/definitions/City'
+      state:
+        $ref: '#/definitions/State'
+      institution:
+        $ref: '#/definitions/Institution'
+      elected: 
+        type: boolean
+      resource_uri:
+        type: string
+      election_round:
+        $ref: '#/definitions/Election_round'
+      candidacy_status:
+        $ref: '#/definitions/Candidacy_status'
+      politician:
+        $ref: "#/definitions/Politician"
+  Political_office:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+      term:
+        type: integer
+      wikipedia:
+        type: string
+  Candidacy_status:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+  City:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      logo:
+        type: string
+      name:
+        type: string
+      resource_uri:
+        type: string
+      state:
+        $ref: "#/definitions/State"
+  Election_round:
+    type: object
+    properties:
+      date:
+        type: string
+        format: date
+      election:
+        type: string
+      id:
+        type: integer
+        format: int64
+      resource_uri:
+        type: string
+      round_number:
+        type: integer
+  Institution:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      logo:
+        type: string
+      name:
+        type: string
+      political_offices:
+        type: array
+        items:
+          $ref: '#/definitions/Political_offices'
+      resource_uri:
+        type: string
+      website:
+        type: string
+      siglum:
+        type: string
+      wikipedia:
+        type: string
+  Political_offices:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      description:
+        type: string
+      name:
+        type: string
+      resource_uri:
+        type: string
+      term:
+        type: integer
+      slug:
+        type: string
+      wikipedia:
+        type: string
+  Meta:
+    type: object
+    properties:
+      previous:
+        type: string
+      total_count:
+        type: integer
+      offset:
+        type: integer
+      next:
+        type: string
+  Country:
+    type: object
+    properties:
+      name:
+        type: string
+      id:
+        type: integer
+        format: int64
+      resource_uri:
+        type: string
+      logo:
+        type: string
+      siglum:
+        type: string
+      slug:
+        type: string
+      wikipedia:
+        type: string
+  State:
+    type: object
+    properties:
+      country:
+        $ref: "#/definitions/Country"
+      name:
+        type: string
+      id:
+        type: integer
+        format: int64
+      logo:
+        type: string
+      siglum:
+        type: string
+      slug:
+        type: string
+      wikipedia:
+        type: string
+      resource_uri:
+        type: string
+        
+  Education:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+  Marital_status:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+  Alternative_names:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+  
+  Occupation:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+        
+  Political_parties:
+    type: object
+    properties:
+      date_end:
+        type: string
+        format: date
+      date_start:
+        type: string
+        format: date
+      id:
+        type: integer
+        format: int64
+      resource_uri:
+        type: string
+      political_party:
+        $ref: '#/definitions/Political_party'
+  
+  Political_party:
+    type: object
+    properties:
+      founded_date:
+        type: string
+        format: date
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      siglum:
+        type: string
+      logo:
+        type: string
+      resource_uri:
+        type: string
+      tse_number:
+        type: integer
+      wikipedia:
+        type: string
+      website:
+        type: string
+  
+  Nationality:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+        
+  Events:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      description:
+        type: string
+      resource_uri:
+        type: string
+      date:
+        type: string
+        format: date
+      politician_event_type:
+        $ref: '#/definitions/Politician_event_type'
+  
+  Politician_event_type:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resource_uri:
+        type: string
+      slug:
+        type: string
+  
+  Mandates:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      events:
+        type: array
+        items:
+          $ref: '#/definitions/Events'
+      candidacies:
+        $ref: '#/definitions/Candidacy'
+      date_end:
+        type: string
+        format: date
+      date_start:
+        type: string
+        format: date
+      resource_uri:
+        type: string
+  
+  Ethnicities:
+    type: object
+    properties:
+      id: 
+        type: integer
+      name:
+        type: string
+      slug:
+        type: string
+      resource_uri:
+        type: string
+  
+  Politician:
+    type: object
+    properties:
+      about:
+        type: string
+      candidacies:
+        type: array
+        items:
+          $ref: '#/definitions/Candidacy'
+      alternative_names:
+        type: array
+        items:
+          $ref: '#/definitions/Alternative_names'
+      cpf:
+        type: string
+      date_of_birth:
+        type: string
+        format: date
+      education:
+        $ref: '#/definitions/Education'
+      email:
+        type: string
+      ethnicity:
+        $ref: "#/definitions/Ethnicities"
+      events: 
+        type: array
+        items:
+          $ref: '#/definitions/Events'
+      gender:
+        type: string
+      id:
+        type: integer
+        format: int64
+      marital_status:
+        $ref: '#/definitions/Marital_status'
+      name:
+        type: string
+      nationality:
+        $ref: '#/definitions/Nationality'
+      occupation:
+        $ref: '#/definitions/Occupation'
+      picture:
+        type: string
+      place_of_birth:
+        type: string
+      political_parties:
+        type: array
+        items:
+          $ref: '#/definitions/Political_parties'
+      resource_uri:
+        type: string
+      state:
+        $ref: '#/definitions/State'
+      website:
+        type: string
